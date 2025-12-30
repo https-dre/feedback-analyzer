@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: feedback-analyzer
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+
