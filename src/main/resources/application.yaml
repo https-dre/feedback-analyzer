@@ -7,4 +7,12 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
 
+langchain4j:
+  google-ai-gemini:
+    chat-model:
+      api-key: ${GEMINI_API_KEY}
+      model-name: gemini-2.5-flash
+      temperature: 0.2
+      log-requests-and-responses: true
+
 
