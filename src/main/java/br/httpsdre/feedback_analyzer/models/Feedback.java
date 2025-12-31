@@ -39,4 +39,13 @@ public class Feedback {
     this.sentiment = Sentiment.UNDEFINED;
     this.isAnalyzed = false;
   }
+
+  public Feedback(String content, Batch parentBatch) {
+    this.id = UuidCreator.getTimeOrderedEpoch();
+    this.originalBody = content;
+    this.category = Category.UNKNOWN;
+    this.sentiment = Sentiment.UNDEFINED;
+    this.isAnalyzed = false;
+    this.batch = parentBatch;
+  }
 }
