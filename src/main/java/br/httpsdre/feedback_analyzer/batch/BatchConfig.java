@@ -55,6 +55,7 @@ public class BatchConfig {
             .build();
   }
 
+  @Bean
   public Step analysisStep(JobRepository jobRepository,
                            PlatformTransactionManager transactionManager,
                            RepositoryItemReader<Feedback> reader,
@@ -69,8 +70,8 @@ public class BatchConfig {
   }
 
   @Bean
-  public Job feedbackAnalysisJob(JobRepository jobRepository,
-                                 Step analysisStep,
+  public Job feedbackAnalysisJob(Step analysisStep,
+                                 JobRepository jobRepository,
                                  BatchCompletionListener listener) {
     return new JobBuilder("feedbackAnalysisJob", jobRepository)
             .start(analysisStep)
