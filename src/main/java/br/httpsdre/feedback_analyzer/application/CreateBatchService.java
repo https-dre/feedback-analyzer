@@ -18,10 +18,12 @@ public class CreateBatchService implements CreateBatchUseCase {
 
   @Override
   public UUID execute(String tenantId, List<String> feedbackBodies) {
+    Batch batch = new Batch(tenantId, null);
     List<Feedback> feedbacks = feedbackBodies.stream()
-            .map(Feedback::new)
+            .map(s -> new Feedback(s, batch))
             .collect(Collectors.toList());
-    Batch batch = new Batch(tenantId, feedbacks);
+    batch.setFeedbacks(feedbacks);
+
     this.repository.save(batch);
     return batch.getId();
   }
