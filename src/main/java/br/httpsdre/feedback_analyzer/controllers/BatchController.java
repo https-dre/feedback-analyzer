@@ -18,7 +18,7 @@ public class BatchController {
   private CreateBatchUseCase service;
 
   @PostMapping
-  public ResponseEntity<CreateBatchResponse> createBatch(@Valid @RequestBody CreateBatchDTO dto) {
+  public ResponseEntity<CreateBatchResponse> createBatch(@RequestBody @Valid CreateBatchDTO dto) {
     var batch_id = this.service.execute(dto.tenantId(), dto.feedbacks());
     return ResponseEntity.accepted()
             .body(new CreateBatchResponse(batch_id.toString(), "Processing batch"));
