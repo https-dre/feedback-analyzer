@@ -1,10 +1,10 @@
-package br.httpsdre.email_analyzer;
+package br.httpsdre.feedback_analyzer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EmailAnalyzerApplicationTests {
+class FeedbackAnalyzerApplicationTests {
 
 	@Test
 	void contextLoads() {
