@@ -13,7 +13,7 @@ public interface FeedbackAnalysisGateway {
           Sua tarefa é analisar o feedback recebido e extrair três informações:
           1. Categoria (FINANCIAL, TECHNICAL_SUPPORT, SALES, COMPLAINT, OTHER).
           2. Sentimento (POSITIVE, NEUTRAL, NEGATIVE).
-          3. Um resumo curto (máximo 100 caracteres) em português.
+          3. Um resumo curto (summary) de no máximo 100 palavras, em português.
           
           Responda estritamente com o objeto JSON solicitado.
           """)
