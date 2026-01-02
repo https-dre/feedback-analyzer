@@ -1,6 +1,6 @@
 package br.httpsdre.feedback_analyzer.controllers;
 
-import br.httpsdre.feedback_analyzer.core.CreateBatchUseCase;
+import br.httpsdre.feedback_analyzer.application.BatchService;
 import br.httpsdre.feedback_analyzer.dtos.CreateBatchDTO;
 import br.httpsdre.feedback_analyzer.dtos.CreateBatchResponse;
 import jakarta.validation.Valid;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/batches")
 public class BatchController {
   @Autowired
-  private CreateBatchUseCase service;
+  private BatchService service;
 
   @PostMapping
   public ResponseEntity<CreateBatchResponse> createBatch(@RequestBody @Valid CreateBatchDTO dto) {
