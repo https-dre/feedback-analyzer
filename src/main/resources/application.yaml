@@ -12,11 +12,6 @@ spring:
     jdbc:
       initialize-schema: always
 
-feedback:
-  batch:
-    chunk-size: 1
-    sleep-duration: 15000
-
 langchain4j:
   google-ai-gemini:
     chat-model:
@@ -24,5 +19,14 @@ langchain4j:
       model-name: gemini-2.5-flash
       temperature: 0.2
       log-requests-and-responses: true
+
+feedback:
+  batch:
+    chunk-size: 1
+    sleep-duration: 15000
+
+server:
+  servlet:
+    context-path: /v1
 
 

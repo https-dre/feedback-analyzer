@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/batches")
+@RequestMapping("/batches")
 public class BatchController {
   @Autowired
   private BatchService service;
