@@ -1,6 +1,5 @@
 package br.httpsdre.feedback_analyzer.dtos;
 
-import br.httpsdre.feedback_analyzer.models.Batch;
 import br.httpsdre.feedback_analyzer.models.Feedback;
 import br.httpsdre.feedback_analyzer.types.Category;
 import br.httpsdre.feedback_analyzer.types.Sentiment;

@@ -5,7 +5,6 @@ import br.httpsdre.feedback_analyzer.exceptions.ValidationException;
 import br.httpsdre.feedback_analyzer.models.WebHook;
 import br.httpsdre.feedback_analyzer.repositories.WebHookRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
