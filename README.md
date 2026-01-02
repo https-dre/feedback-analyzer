@@ -15,7 +15,13 @@ O diferencial técnico do projeto reside na orquestração eficiente do processa
 
 ## Como testar?
 
-**1. Comece clonando o repositório:**
+**Ops**:
+Certifique-se de ter o [Docker](https://www.docker.com/get-started/) e o 
+[Docker Compose](https://docs.docker.com/compose/install/) instalados em seu computador.
+
+**1. Clone o Repositório:**
+
+Abra seu Terminal/Command-Prompt e execute os comandos abaixo:
 
 ```bash
 # Clone o repositório
@@ -25,19 +31,25 @@ git clone https://github.com/https-dre/feedback-analyzer.git
 cd feedback-analyzer
 ```
 
-**2. Defina variáveis de ambiente necessárias:**
- - DB_URL: "postgres://host:port/db_name" - URL do Banco de Dados PostgreSQL
- - DB_USER - usuário do banco de dados
- - DB_PASSWORD - senha de acesso do seu usuário
- - GEMINI_API_KEY - uma chave de API do Gemini.
+**2. Defina variáveis de ambiente:**
 
-Ops:
+Em um arquivo `.env`:
 
-- Não se esqueça de criar o banco corretamente
-- Certifique-se que seu usuário tem permissão para criar e gerir tabelas (necessário para as Migrations do Flyway)
+```bash
+DB_URL=postgresql://localhost:5432/feedback-analyzer # URL do Banco de Dados PostgreSQL
+DB_USER=root # usuário do banco de dados
+DB_PASSWORD=root # senha de acesso do seu usuário
+GEMINI_API_KEY=... # uma chave de API do Gemini.
+```
 
-**2. Verifique seu `application.yaml`:**
+**Ops:**
 
+        - Não se esqueça de criar o banco corretamente;
+        - Certifique-se que seu usuário tem permissão para criar e gerir tabelas (necessário para as Migrations do Flyway).
+
+**2. Verifique seu [application.yaml](./src/main/resources/application.yaml):**
+
+Configurações recomendadas para testes:
 ```yaml
 feedback:
     batch:
@@ -47,12 +59,11 @@ feedback:
 
 **3. Execute o projeto:**
 
-```bash
-# Execute com Maven Wrapper (Linux/Mac)
-./mvnw spring-boot:run
+Usando o docker-compose, podemos executar a aplicação e o banco de dados facilmente, usando o comando abaixo:
 
-# Ou no Windows
-.\mvnw.cmd spring-boot:run
+```bash
+docker-compose up -d
+
 ```
 
 Ao executar pela primeira vez, o Flyway e o Spring Batch devem executar suas migrações corretamente.
