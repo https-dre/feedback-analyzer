@@ -5,7 +5,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: root
-      POSTGRES_DB: email-analyser
+      POSTGRES_DB: feedback-analyzer
       POSTGRES_PASSWORD: root
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -13,7 +13,7 @@ services:
     build: .
     env_file: .env
     environment:
-      DB_URL: postgresql://database:5432/email-analyser
+      DB_URL: postgresql://database:5432/feedback-analyzer
     ports:
       - "8080:8080"
     depends_on:
