@@ -1,6 +1,6 @@
 package br.httpsdre.feedback_analyzer.types;
 
-public enum BatchStatus {
+public enum AnalysisStatus {
   PENDING,
   PROCESSING,
   COMPLETED,

@@ -1,6 +1,6 @@
 package br.httpsdre.feedback_analyzer.models;
 
-import br.httpsdre.feedback_analyzer.types.BatchStatus;
+import br.httpsdre.feedback_analyzer.types.AnalysisStatus;
 import com.github.f4b6a3.uuid.UuidCreator;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +22,7 @@ public class Batch {
   @Column(name = "tenant_id")
   private String tenantId;
   @Enumerated(EnumType.STRING)
-  private BatchStatus status;
+  private AnalysisStatus status;
   @Column(name = "created_at")
   private LocalDateTime createdAt;
   @Column(name = "completed_at")
@@ -33,7 +33,7 @@ public class Batch {
   public Batch(String tenantId, List<Feedback> feedbacks) {
     this.id = UuidCreator.getTimeOrderedEpoch();
     this.tenantId = tenantId;
-    this.status = BatchStatus.PENDING;
+    this.status = AnalysisStatus.PENDING;
     this.createdAt = LocalDateTime.now();
     this.feedbacks = feedbacks;
   }
