@@ -6,6 +6,16 @@ spring:
     url: jdbc:${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
+feedback:
+  batch:
+    chunk-size: 1
+    sleep-duration: 15000
 
 langchain4j:
   google-ai-gemini:
