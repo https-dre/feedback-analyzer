@@ -7,3 +7,16 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: email-analyser
       POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DB_URL: postgresql://database:5432/email-analyser
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+volumes:
+  postgres_data:
