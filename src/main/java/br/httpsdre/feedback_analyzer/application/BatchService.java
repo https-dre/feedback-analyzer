@@ -1,5 +1,8 @@
 package br.httpsdre.feedback_analyzer.application;
 
+import br.httpsdre.feedback_analyzer.dtos.BatchDTO;
+import br.httpsdre.feedback_analyzer.dtos.BatchSummaryResponse;
+import br.httpsdre.feedback_analyzer.exceptions.NotFoundException;
 import br.httpsdre.feedback_analyzer.models.Batch;
 import br.httpsdre.feedback_analyzer.models.Feedback;
 import br.httpsdre.feedback_analyzer.repositories.BatchRepository;
@@ -24,7 +27,7 @@ public class BatchService {
   private final JobLauncher jobLauncher;
   private final Job feedbackAnalysisJob;
 
-  public UUID execute(String tenantId, List<String> feedbackBodies) {
+  public UUID createBatch(String tenantId, List<String> feedbackBodies) {
     Batch batch = new Batch(tenantId, null);
     List<Feedback> feedbacks = feedbackBodies.stream()
             .map(s -> new Feedback(s, batch))
@@ -46,5 +49,16 @@ public class BatchService {
       }
     });
     return batch.getId();
+  }
+
+  public List<BatchSummaryResponse>
+    getBatchesByTenantId(String tenantId) {
+    return this.repository.findSummariesByTenantId(tenantId);
+  }
+
+  public BatchDTO getBatchById(String id) {
+    return this.repository.findById(UUID.fromString(id))
+            .map(BatchDTO::new)
+            .orElseThrow(() -> new NotFoundException("Batch with id " + id + " not found!"));
   }
 }
