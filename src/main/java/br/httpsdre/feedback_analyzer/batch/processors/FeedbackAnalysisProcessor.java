@@ -1,6 +1,7 @@
 package br.httpsdre.feedback_analyzer.batch.processors;
 
 import br.httpsdre.feedback_analyzer.adapters.FeedbackAnalysisGateway;
+import br.httpsdre.feedback_analyzer.config.FeedbackBatchProperties;
 import br.httpsdre.feedback_analyzer.dtos.AnalysisResult;
 import br.httpsdre.feedback_analyzer.models.Feedback;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FeedbackAnalysisProcessor implements ItemProcessor<Feedback, Feedback> {
   private final FeedbackAnalysisGateway analysisGateway;
+  private final FeedbackBatchProperties properties;
 
   @Override
   public Feedback process(Feedback item) throws Exception {
@@ -22,6 +24,11 @@ public class FeedbackAnalysisProcessor implements ItemProcessor<Feedback, Feedba
     item.setCategory(result.category());
     item.setSentiment(result.sentiment());
     item.setAnalyzed(true);
+    try {
+      Thread.sleep(this.properties.getSleepDuration());
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
     return item;
   }
 }
