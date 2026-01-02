@@ -2,8 +2,10 @@ package br.httpsdre.feedback_analyzer.batch;
 
 import br.httpsdre.feedback_analyzer.batch.listeners.BatchCompletionListener;
 import br.httpsdre.feedback_analyzer.batch.processors.FeedbackAnalysisProcessor;
+import br.httpsdre.feedback_analyzer.config.FeedbackBatchProperties;
 import br.httpsdre.feedback_analyzer.models.Feedback;
 import br.httpsdre.feedback_analyzer.repositories.FeedbackRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -26,7 +28,9 @@ import java.util.Map;
 import java.util.UUID;
 
 @Configuration
+@AllArgsConstructor
 public class BatchConfig {
+  private final FeedbackBatchProperties properties;
 
   @Bean
   @StepScope
@@ -34,6 +38,10 @@ public class BatchConfig {
           FeedbackRepository repository,
           @Value("#{jobParameters['batchId']}") String batchIdStr
   ) {
+    if (batchIdStr == null) {
+      return null;
+    }
+
     UUID batchId = UUID.fromString(batchIdStr);
     return new RepositoryItemReaderBuilder<Feedback>()
             .name("feedbackItemReader")
@@ -62,7 +70,7 @@ public class BatchConfig {
                            FeedbackAnalysisProcessor processor,
                            RepositoryItemWriter<Feedback> writer) {
     return new StepBuilder("analysisStep", jobRepository)
-            .<Feedback, Feedback>chunk(10, transactionManager)
+            .<Feedback, Feedback>chunk(this.properties.getChunkSize(), transactionManager)
             .reader(reader)
             .processor(processor)
             .writer(writer)
