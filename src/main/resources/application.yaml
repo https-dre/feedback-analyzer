@@ -11,6 +11,9 @@ spring:
       enabled: false
     jdbc:
       initialize-schema: always
+springdoc:
+  swagger-ui:
+    path: /docs
 
 langchain4j:
   google-ai-gemini:

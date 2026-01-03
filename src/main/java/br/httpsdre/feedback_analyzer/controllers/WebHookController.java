@@ -3,6 +3,7 @@ package br.httpsdre.feedback_analyzer.controllers;
 import br.httpsdre.feedback_analyzer.application.WebHookService;
 import br.httpsdre.feedback_analyzer.dtos.CreateWebhookRequest;
 import br.httpsdre.feedback_analyzer.dtos.WebHookDetailsResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/webhooks")
+@Tag(name = "WebHooks", description = "Endpoints para gerenciar quantos WebHooks cada Tenant possui")
 public class WebHookController {
   @Autowired
   private WebHookService service;

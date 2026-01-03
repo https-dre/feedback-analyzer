@@ -5,6 +5,7 @@ import br.httpsdre.feedback_analyzer.dtos.BatchDTO;
 import br.httpsdre.feedback_analyzer.dtos.BatchSummaryResponse;
 import br.httpsdre.feedback_analyzer.dtos.CreateBatchDTO;
 import br.httpsdre.feedback_analyzer.dtos.CreateBatchResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/batches")
+@Tag(name = "Batches", description = "Endpoints para gerenciar cada lote criado no sistema")
 public class BatchController {
   @Autowired
   private BatchService service;
