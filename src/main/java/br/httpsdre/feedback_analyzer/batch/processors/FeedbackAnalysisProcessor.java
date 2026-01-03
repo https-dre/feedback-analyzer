@@ -4,6 +4,7 @@ import br.httpsdre.feedback_analyzer.adapters.FeedbackAnalysisGateway;
 import br.httpsdre.feedback_analyzer.config.FeedbackBatchProperties;
 import br.httpsdre.feedback_analyzer.dtos.AnalysisResult;
 import br.httpsdre.feedback_analyzer.models.Feedback;
+import br.httpsdre.feedback_analyzer.types.AnalysisStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -19,11 +20,19 @@ public class FeedbackAnalysisProcessor implements ItemProcessor<Feedback, Feedba
   @Override
   public Feedback process(Feedback item) throws Exception {
     log.info("Processing feedback with ID: {}", item.getId());
+    try {
+      AnalysisResult result = analysisGateway.analyze(item.getOriginalBody());
+      item.setCategory(result.category());
+      item.setSentiment(result.sentiment());
+      item.setSummary(result.summary());
+      item.setStatus(AnalysisStatus.COMPLETED);
+    } catch (Exception e) {
+      item.setStatus(AnalysisStatus.FAILED);
+      String msg = e.getMessage() != null ? e.getMessage() : e.toString();
+      if(msg.length() > 4000) msg = msg.substring(0, 4000);
+      item.setErrorMessage(msg);
+    }
 
-    AnalysisResult result = analysisGateway.analyze(item.getOriginalBody());
-    item.setCategory(result.category());
-    item.setSentiment(result.sentiment());
-    item.setAnalyzed(true);
     try {
       Thread.sleep(this.properties.getSleepDuration());
     } catch (InterruptedException e) {

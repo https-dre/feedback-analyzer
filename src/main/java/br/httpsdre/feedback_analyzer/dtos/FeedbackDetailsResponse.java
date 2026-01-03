@@ -1,6 +1,7 @@
 package br.httpsdre.feedback_analyzer.dtos;
 
 import br.httpsdre.feedback_analyzer.models.Feedback;
+import br.httpsdre.feedback_analyzer.types.AnalysisStatus;
 import br.httpsdre.feedback_analyzer.types.Category;
 import br.httpsdre.feedback_analyzer.types.Sentiment;
 
@@ -10,12 +11,12 @@ public record FeedbackDetailsResponse(
         Category category,
         Sentiment sentiment,
         String summary,
-        boolean isAnalyzed
+        AnalysisStatus status
 
 ) {
   public FeedbackDetailsResponse(Feedback model) {
     this(model.getId().toString(), model.getOriginalBody(),
             model.getCategory(), model.getSentiment(),
-            model.getSummary(), model.isAnalyzed());
+            model.getSummary(), model.getStatus());
   }
 }

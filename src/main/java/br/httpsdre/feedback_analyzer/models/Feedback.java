@@ -1,5 +1,6 @@
 package br.httpsdre.feedback_analyzer.models;
 
+import br.httpsdre.feedback_analyzer.types.AnalysisStatus;
 import br.httpsdre.feedback_analyzer.types.Category;
 import br.httpsdre.feedback_analyzer.types.Sentiment;
 import com.github.f4b6a3.uuid.UuidCreator;
@@ -26,8 +27,14 @@ public class Feedback {
   private Sentiment sentiment;
   @Column(columnDefinition = "TEXT")
   private String summary;
-  @Column(name = "is_analyzed")
-  private boolean isAnalyzed;
+//  @Column(name = "is_analyzed")
+//  private boolean isAnalyzed;
+  @Enumerated(EnumType.STRING)
+  private AnalysisStatus status;
+
+  @Column(name = "error_message", columnDefinition = "TEXT")
+  private String errorMessage;
+
   @ManyToOne
   @JoinColumn(name = "batch_id")
   private Batch batch;
@@ -37,7 +44,8 @@ public class Feedback {
     this.originalBody = content;
     this.category = Category.UNKNOWN;
     this.sentiment = Sentiment.UNDEFINED;
-    this.isAnalyzed = false;
+    //this.isAnalyzed = false;
+    this.status = AnalysisStatus.PENDING;
   }
 
   public Feedback(String content, Batch parentBatch) {
@@ -45,7 +53,8 @@ public class Feedback {
     this.originalBody = content;
     this.category = Category.UNKNOWN;
     this.sentiment = Sentiment.UNDEFINED;
-    this.isAnalyzed = false;
+    //this.isAnalyzed = false;
     this.batch = parentBatch;
+    this.status = AnalysisStatus.PENDING;
   }
 }
