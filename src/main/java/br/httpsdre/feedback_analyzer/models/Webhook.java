@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class WebHook {
+public class Webhook {
   @Id
   private UUID id;
   private String url;
@@ -22,14 +22,14 @@ public class WebHook {
   @Column(name = "tenant_id")
   private String tenantId;
 
-  public WebHook(String url, String tenantId, String token) {
+  public Webhook(String url, String tenantId, String token) {
     this.id = UuidCreator.getTimeOrderedEpoch();
     this.url = url;
     this.token = token;
     this.tenantId = tenantId;
   }
 
-  public WebHook(CreateWebhookRequest request) {
+  public Webhook(CreateWebhookRequest request) {
     this.id = UuidCreator.getTimeOrderedEpoch();
     this.url = request.url();
     this.tenantId = request.tenant_id();

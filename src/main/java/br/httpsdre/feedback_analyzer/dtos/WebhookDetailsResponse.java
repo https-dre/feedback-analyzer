@@ -1,17 +1,17 @@
 package br.httpsdre.feedback_analyzer.dtos;
 
-import br.httpsdre.feedback_analyzer.models.WebHook;
+import br.httpsdre.feedback_analyzer.models.Webhook;
 
 import java.util.UUID;
 
-public record WebHookDetailsResponse(
+public record WebhookDetailsResponse(
         UUID id,
         String url,
         String token,
         String tenantId
 
 ) {
-  public WebHookDetailsResponse(WebHook webHook) {
+  public WebhookDetailsResponse(Webhook webHook) {
     this(webHook.getId(), webHook.getUrl(), webHook.getToken(), webHook.getTenantId());
   }
 }
