@@ -44,10 +44,10 @@ GEMINI_API_KEY=... # uma chave de API do Gemini.
 
 **Ops:**
 
-        - Não se esqueça de criar o banco corretamente;
-        - Certifique-se que seu usuário tem permissão para criar e gerir tabelas (necessário para as Migrations do Flyway).
+- Não se esqueça de criar o banco corretamente;
+- Seu usuário deve ter permissão para criar e gerir tabelas (necessário para as Migrations do Flyway).
 
-**2. Verifique seu [application.yaml](./src/main/resources/application.yaml):**
+**3. Verifique seu [application.yaml](./src/main/resources/application.yaml):**
 
 Configurações recomendadas para testes:
 ```yaml
@@ -57,7 +57,7 @@ feedback:
         sleep-duration: 15000 # Delay entre as chamadas para o Gemini (criado para não exceder os limites de API)
 ```
 
-**3. Execute o projeto:**
+**4. Execute o projeto:**
 
 Usando o docker-compose, podemos executar a aplicação e o banco de dados facilmente, usando o comando abaixo:
 
@@ -68,4 +68,4 @@ docker-compose up -d
 
 Ao executar pela primeira vez, o Flyway e o Spring Batch devem executar suas migrações corretamente.
 
-A Api estará executando em: http://localhost:8080/
+A documentação da API estará disponível em: http://localhost:8080/v1/docs
