@@ -11,6 +11,7 @@ spring:
       enabled: false
     jdbc:
       initialize-schema: always
+
 springdoc:
   swagger-ui:
     path: /docs
@@ -27,9 +28,3 @@ feedback:
   batch:
     chunk-size: 1
     sleep-duration: 15000
-
-server:
-  servlet:
-    context-path: /v1
-
-

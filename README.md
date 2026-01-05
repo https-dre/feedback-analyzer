@@ -68,4 +68,4 @@ docker-compose up -d
 
 Ao executar pela primeira vez, o Flyway e o Spring Batch devem executar suas migrações corretamente.
 
-A documentação da API estará disponível em: http://localhost:8080/v1/docs
+A documentação da API estará disponível em: http://localhost:8080/docs
